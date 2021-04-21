@@ -18,18 +18,30 @@ class RequestController extends Controller
     }
     public function index()
     {
-        return view('request.index');
+        $data = [
+            'barang'      => Barang::all(),
+            'suplier'     => Suplier::Count()->get(),
+        ];
+       return view('request.index', $data);
     }
 
     public function accept()
     {
-        return view('request.accept');
+        $data = [
+            'barang'      => Barang::all(),
+            'suplier'     => Suplier::Count()->get(),
+        ];
+       return view('request.accept', $data);
     }
     public function riject()
     {
-        return view('request.riject');
+        $data = [
+            'barang'      => Barang::all(),
+            'suplier'     => Suplier::Count()->get(),
+        ];
+       return view('request.riject', $data);
     }
-    
+
     public function store(Request $request, $id)
     {
         $requests = Permintaan::create([

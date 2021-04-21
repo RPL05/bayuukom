@@ -37,7 +37,9 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Stock Barang</h6>
-                        <h5 class="ml-auto">210</h5>
+                        <h5 class="ml-auto">
+                            {{ $barang->sum('quantity') }}
+                        </h5>
                     </div>
                 </div>
             </div>

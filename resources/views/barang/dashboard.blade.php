@@ -44,9 +44,7 @@
                             <div class="card-body d-flex">
                                 <h5 class="text-muted">Stock Barang</h5>
                                 <h4 class="ml-auto">
-                                    @foreach ($barangs as $barang)
-                                        {{ $barang->quantity }}
-                                    @endforeach
+                                        {{ $barang->sum('quantity') }}
                                 </h4>
                             </div>
                         </div>
@@ -114,9 +112,7 @@
                                 <div class="card-body d-flex">
                                     <h5 class="text-muted">Stock Barang</h5>
                                     <h3 class="ml-auto">
-                                        @foreach ($barangs as $barang)
-                                            {{ $barang->quantity }}
-                                        @endforeach
+                                        {{ $barang->sum('quantity') }}
                                     </h3>
                                 </div>
                             </div>
@@ -134,13 +130,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($barangs as $barang)
+                                    @forelse ($barang as $barangs)
                                     <tr>
-                                        <td>{{$barang->kode_barang}}</td>
-                                        <td>{{$barang->suplier->nama}}</td>
-                                        <td>{{$barang->nama}}</td>
-                                        <td>{{$barang->suplier->phone}}</td>
-                                        <td>{{ $barang->quantity }}</td>
+                                        <td>{{$barangs->kode_barang}}</td>
+                                        <td>{{$barangs->suplier->nama}}</td>
+                                        <td>{{$barangs->nama}}</td>
+                                        <td>{{$barangs->suplier->phone}}</td>
+                                        <td>{{ $barangs->quantity }}</td>
                                     </tr>
                                     @empty
                                         <tr>

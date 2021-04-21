@@ -58,9 +58,10 @@ class BarangController extends Controller
     }
     public function dashboard()
     {
-        $barangs = Barang::all();
-        $supliers = Suplier::all();
-
-        return view('barang.dashboard', compact('barangs','supliers'));
+        $data = [
+            'barang'      => Barang::all(),
+            'suplier'     => Suplier::Count()->get(),
+        ];
+       return view('barang.dashboard', $data);
     }
 }
