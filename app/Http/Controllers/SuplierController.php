@@ -33,4 +33,10 @@ class SuplierController extends Controller
 
         return redirect()->back()->with(['success' => 'data suplier berhasil dibuat' ]);
     }
+    public function cetakLaporan($tglawal, $tglakhir)
+    {
+        // dd(["Tanggal Awal : ".$tglawal, "Tanggal Akhir : ".$tglakhir]);
+        $cetakPertanggal = Suplier::whereBetween('created_at',[$tglawal, $tglakhir])->latest()->get();
+        return view('suplier.cetak', compact('cetakPertanggal'));
+    }
 }

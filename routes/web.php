@@ -44,6 +44,7 @@ Route::group(['prefix' => 'suplier'], function(){
     route::get('index','SuplierController@index')->name('suplier.index');
     route::get('create','SuplierController@create')->name('suplier.create');
     route::post('store','SuplierController@store')->name('suplier.store');
+    route::get('cetak/{tglawal}/{tglakhir}','SuplierController@cetakLaporan')->name('suplier.cetak');
 });
 
 Route::group(['prefix' => 'request'], function(){
