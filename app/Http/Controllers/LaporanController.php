@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaksi;
-use App\Masterbiaya;
+use App\Barang;
+use App\Suplier;
 use App\Laporan;
 use PDF;
 use Illuminate\Http\Request;
@@ -22,8 +22,8 @@ class LaporanController extends Controller
     public function cetakLaporan($tglawal, $tglakhir)
     {
         // dd(["Tanggal Awal : ".$tglawal, "Tanggal Akhir : ".$tglakhir]);
-        $masterbiayas = Masterbiaya::all();
-        $cetakPertanggal = Transaksi::all()->whereBetween('created_at',[$tglawal, $tglakhir])->all();
-        return view('laporan.cetak', compact('cetakPertanggal', 'masterbiayas'));
+        $supliers = Suplier::all();
+        $cetakPertanggal = Barang::whereBetween('created_at',[$tglawal, $tglakhir])->latest()->get();
+        return view('barang.cetak', compact('cetakPertanggal', 'supliers'));
     }
 }

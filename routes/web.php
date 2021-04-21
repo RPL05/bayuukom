@@ -15,36 +15,42 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/beranda', 'HomeController@index')->name('beranda');
+Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::resource('users', 'UserController');
 
-Route::group(['prefix' => 'masterbiaya'], function(){
-    Route::get('index','MasterbiayaController@index')->name('masterbiaya.index');
-    Route::get('create','MasterbiayaController@create')->name('masterbiaya.create');
-    Route::post('store','MasterbiayaController@store')->name('masterbiaya.store');
-    Route::get('edit/{masterbiaya}','MasterbiayaController@edit')->name('masterbiaya.edit');
-    Route::put('update/{masterbiaya}','MasterbiayaController@update')->name('masterbiaya.update');
-    Route::delete('delete/{masterbiaya}','MasterbiayaController@destroy')->name('masterbiaya.delete');
-});
-
-Route::group(['prefix' => 'transaksi'], function(){
-    Route::get('index','TransaksiController@index')->name('transaksi.index');
-    Route::get('create','TransaksiController@create')->name('transaksi.create');
-    Route::post('store','TransaksiController@store')->name('transaksi.store');
-    Route::get('edit/{transaksi}','TransaksiController@edit')->name('transaksi.edit');
-    Route::put('update/{transaksi}','TransaksiController@update')->name('transaksi.update');
-    Route::delete('delete/{transaksi}','TransaksiController@destroy')->name('transaksi.delete');
-});
-
 Route::group(['prefix' => 'laporan'], function(){
-    route::get('index','LaporanController@index')->name('laporan.index');
-    route::get('cetak/{tglawal}/{tglakhir}','LaporanController@cetakLaporan')->name('laporan.cetak');
+});
+
+route::post('/send-email', 'HomeController@sendEmail')->name('send.email');
+
+Route::group(['prefix' => 'cekBarang'], function(){
+    route::get('index','cekBarangController@index')->name('cekbarang.index');
+    route::get('create','cekBarangController@create')->name('cekbarang.create');
+});
+
+Route::group(['prefix' => 'barang'], function(){
+    route::get('index','BarangController@index')->name('barang.index');
+    route::get('dashboard','BarangController@dashboard')->name('barang.dashboard');
+    route::get('create','BarangController@create')->name('barang.create');
+    route::post('store','BarangController@store')->name('barang.store');
+    route::get('edit/{barang}','BarangController@edit')->name('barang.edit');
+    route::put('update/{barang}','BarangController@update')->name('barang.update');
+    route::get('cetak/{tglawal}/{tglakhir}','LaporanController@cetakLaporan')->name('barang.cetak');
 });
 
 
-Route::group(['prefix' => 'rekap'], function(){
-    route::get('note/{transaksi}', 'TransaksiController@note')->name('transaksi.rekap');
-
+Route::group(['prefix' => 'suplier'], function(){
+    route::get('index','SuplierController@index')->name('suplier.index');
+    route::get('create','SuplierController@create')->name('suplier.create');
+    route::post('store','SuplierController@store')->name('suplier.store');
 });
 
+Route::group(['prefix' => 'request'], function(){
+    route::get('index','RequestController@index')->name('request.index');
+    route::get('accept','RequestController@accept')->name('request.accept');
+    route::get('riject','RequestController@riject')->name('request.riject');
+    route::get('indexcek','CekbarangController@index')->name('request.cekbarang.indexcek');
+    route::get('createcek/{id}','CekbarangController@create')->name('request.cekbarang.createcek');
+    route::post('store/{id}','RequestController@store')->name('request.store');
+});

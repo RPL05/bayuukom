@@ -170,6 +170,7 @@ return [
          Spatie\Permission\PermissionServiceProvider::class,
          Laracasts\Flash\FlashServiceProvider::class,
          Collective\Html\HtmlServiceProvider::class,
+         Nexmo\Laravel\NexmoServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -230,7 +231,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
     ],
 
 ];

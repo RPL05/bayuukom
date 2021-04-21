@@ -12,6 +12,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "barryvdh/laravel-dompdf": "^0.8.6",
+        "nexmo/client-core": "^2.6",
+        "nexmo/laravel": "^2.3",
         "spatie/laravel-permission": "^2.1",
         "laracasts/flash": "^3.0",
         "laravelcollective/html": "^5.3.0",

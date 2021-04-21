@@ -12,44 +12,44 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // ketua
-        $boss = factory(User::class)->create([
+        // admin
+        $admin = factory(User::class)->create([
             'name'          => 'Dr. Taylor Otwell',
-            'email'         => 'boss@AJC.com',
-            'password' => bcrypt('AJC'),
+            'email'         => 'admin@barang.com',
+            'password' => bcrypt('barang'),
         ]);
 
-        $boss->assignRole('admin');
+        $admin->assignRole('admin');
 
-        $this->command->info('>_ Here is your bos details to login:');
-        $this->command->warn($boss->email);
-        $this->command->warn('Password is "AJC"');
+        $this->command->info('>_ Here is your admin details to login:');
+        $this->command->warn($admin->email);
+        $this->command->warn('Password is "barang"');
 
-        // anggota
-        $kasir = factory(User::class)->create([
-            'name'          => 'John Doe',
-            'email'         => 'kasir@AJC.com',
-            'password' => bcrypt('AJC'),
+        // admin Gudang
+        $admingudang = factory(User::class)->create([
+            'name'          => 'Dr. Taylor Otwell',
+            'email'         => 'admingudang@barang.com',
+            'password' => bcrypt('barang'),
         ]);
 
-        $kasir->assignRole('kasir');
+        $admingudang->assignRole('admingudang');
 
-        $this->command->info('>_ Here is your kasir details to login:');
-        $this->command->warn($kasir->email);
-        $this->command->warn('Password is "AJC"');
+        $this->command->info('>_ Here is your admingudang details to login:');
+        $this->command->warn($admingudang->email);
+        $this->command->warn('Password is "barang"');
 
         // client
-        $user = factory(User::class)->create([
+        $pengguna = factory(User::class)->create([
             'name'          => 'John Doe',
-            'email'         => 'user@AJC.com',
-            'password' => bcrypt('AJC'),
+            'email'         => 'pengguna@barang.com',
+            'password' => bcrypt('barang'),
         ]);
 
-        $user->assignRole('user');
+        $pengguna->assignRole('pengguna');
 
-        $this->command->info('>_ Here is your user details to login:');
-        $this->command->warn($user->email);
-        $this->command->warn('Password is "AJC"');
+        $this->command->info('>_ Here is your pengguna details to login:');
+        $this->command->warn($pengguna->email);
+        $this->command->warn('Password is "barang"');
         // bersihkan cache
         $this->command->call('cache:clear');
     }
