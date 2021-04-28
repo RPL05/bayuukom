@@ -36,6 +36,7 @@ Route::group(['prefix' => 'barang'], function(){
     route::post('store','BarangController@store')->name('barang.store');
     route::get('edit/{barang}','BarangController@edit')->name('barang.edit');
     route::put('update/{barang}','BarangController@update')->name('barang.update');
+    route::delete('delete/{barang}','BarangController@destroy')->name('barang.delete');
     route::get('cetak/{tglawal}/{tglakhir}','LaporanController@cetakLaporan')->name('barang.cetak');
 });
 
@@ -50,8 +51,12 @@ Route::group(['prefix' => 'suplier'], function(){
 Route::group(['prefix' => 'request'], function(){
     route::get('index','RequestController@index')->name('request.index');
     route::get('accept','RequestController@accept')->name('request.accept');
+    route::get('accept/cetak/{tglawal}/{tglakhir}','RequestController@acceptLaporan')->name('request.accept.cetak');
+    route::get('riject/cetak/{tglawal}/{tglakhir}','RequestController@rijectLaporan')->name('request.riject.cetak');
     route::get('riject','RequestController@riject')->name('request.riject');
     route::get('indexcek','CekbarangController@index')->name('request.cekbarang.indexcek');
     route::get('createcek/{id}','CekbarangController@create')->name('request.cekbarang.createcek');
     route::post('store/{id}','RequestController@store')->name('request.store');
+    route::get('show/{permintaan}','RequestController@show')->name('request.show');
+    route::get('detail/{permintaan}','RequestController@detail')->name('request.riject.detail');
 });

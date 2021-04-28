@@ -4,13 +4,13 @@
 <div class="d-flex bd-cheatsheet container-fluid bg-body">
     <div class="col-md-2" style="margin-top : -28px">
         <section id="content">
-            <h5 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3" style="margin-left : 100px">{{ auth()->user()->roles->first()->name }}</h5>
+            <h5 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3" style="margin-left : 60px">{{ auth()->user()->roles->first()->name }}</h5>
             <article>
                 <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 text-center">
                     <img src="{{asset('image/awww.png')}}" class="rounded-circle mt-3" width="80px" alt="">
-                    <p class="font-weight-bold text-center pt-2">Taylor otwel</p>
+                    <p class="font-weight-bold text-center pt-2">{{ auth()->user()->name }}</p>
                 </div>
-                <p class="text-muted text-center"style="margin-top: -15px">taylorotwel@mail.com
+                <p class="text-muted text-center"style="margin-top: -15px">{{ auth()->user()->email }}
                 </p>
                 <div class="d-flex justify-content-center" style="margin-top: 15px">
                 <div class="px-3">
@@ -55,7 +55,7 @@
                         <div class="card border-0 shadow">
                             <div class="card-body d-flex">
                                 <h6 class="text-muted">Permintaan <br> Di terima</h6>
-                                <h5 class="ml-auto">100</h5>
+                                <h5 class="ml-auto">{{ $totalrequest }}</h5>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         <div class="card border-0 shadow">
                             <div class="card-body d-flex">
                                 <h6 class="text-muted">Permintaan <br> Di tolak</h6>
-                                <h5 class="ml-auto">100</h5>
+                                <h5 class="ml-auto">{{ $totalrequest }}</h5>
                             </div>
                         </div>
                     </div>
@@ -72,24 +72,27 @@
                     <h5 class="font-weight-bold mt-4">Request</h5>
                     @role('admingudang')
                     <div class="d-flex pt-2">
-                        <a href="" class="btn btn-outline-primary btn-sm">Accept</a>
+                        <a href="{{route('request.accept')}}" class="btn btn-outline-primary btn-sm">Accept</a>
                         <div class="px-2">
-                            <a href="" class="btn btn-outline-info btn-sm">Riject</a>
+                            <a href="{{route('request.riject')}}" class="btn btn-outline-info btn-sm">Riject</a>
                         </div>
                     </div>
                     <h6 class="text-muted mt-1">Cari Laporan Request Riject</h6>
                     <div class="row">
                         <div class="d-flex mr-auto">
                             <div class="col-md-7">
-                                <input type="text" name="nama" class="form-control" placeholder="" required>
+                                <input type="date" name="tglawal" id="tglawal" class="form-control" />
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="nama" class="form-control" placeholder="" required>
+                                <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                             </div>
                         </div>
                     </div>
                     <div class="pt-3">
-                    <a href="" class="btn btn-outline-primary btn-sm">Cari Laporan</a>
+                        <a onclick="this.href='riject/cetak/'+ document.getElementById('tglawal').value +
+                                '/' + document.getElementById('tglakhir').value" class="btn btn-outline-primary btn-sm">
+                                    Cari Laporan
+                                </a>
                     <a href="{{route('barang.create')}}" class="btn btn-outline-info btn-sm">Tambah Stock</a>
                     </div>
                     @endrole
@@ -104,23 +107,25 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {{-- @forelse ($transaksis as $transaksi) --}}
+                            @forelse ($permintaan as $barangs)
                             <tr>
-                                <td>REQ.2021.13</td>
-                                <td>BRG.2021.13</td>
-                                <td>100</td>
+                                <td>{{ $barangs->kode_request }}</td>
+                                @foreach ($barang as $brngs)
+                                    <td>{{ $brngs->kode_barang }}</td>
+                                @endforeach
+                                <td>{{ $barangs->jmlh_permintaan }}</td>
                                 <td>
                                     <span class="badge badge-danger">Riject</span>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-outline-primary btn-sm">Details</a>
+                                    <a href="{{ route('request.riject.detail', $barangs->id) }}" class="btn btn-outline-primary btn-sm">Details</a>
                                 </td>
                             </tr>
-                            {{-- @empty
+                            @empty
                                 <tr>
-                                    <td class="text-center" colspan="6">Data Suplier Belum Tersedia</td>
+                                    <td class="text-center" colspan="6">Data Accept Belum Tersedia</td>
                                 </tr>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

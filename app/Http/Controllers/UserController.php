@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Barang;
+use App\Permintaan;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use Illuminate\Http\Request;
@@ -22,7 +24,14 @@ class UserController extends Controller
     {
         $users = User::paginate(5);
 
-        return view('user.index', compact('users'));
+        $totalrequest = Permintaan::all()->count();
+        $bar = Barang::all();
+        $data = [
+            'barang'      => Barang::Count()->get(),
+            'perm'        => Permintaan::all(),
+        ];
+
+        return view('user.index', $data ,compact('users','totalrequest','bar'));
     }
 
     /**
@@ -35,7 +44,13 @@ class UserController extends Controller
 
         $roles = Role::all();
 
-        return view('user.create', compact('roles'));
+        $totalrequest = Permintaan::all()->count();
+        $data = [
+            'barang'      => Barang::Count()->get(),
+            'perm'        => Permintaan::all(),
+        ];
+
+        return view('user.create', $data, compact('roles','totalrequest'));
     }
 
     /**
@@ -85,7 +100,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        $totalrequest = Permintaan::all()->count();
+        $data = [
+            'barang'      => Barang::Count()->get(),
+            'perm'        => Permintaan::all(),
+        ];
+        $roles = Role::all();
+        return view('user.edit', $data, compact('user','roles','totalrequest'));
     }
 
     /**

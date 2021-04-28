@@ -27,4 +27,14 @@ class Permintaan extends Model
     {
         return $this->belongsTo(Barang::class);
     }
+
+    public function barangs()
+    {
+        return $this->hasMany(Barang::class);
+    }
+
+    public function suplier()
+    {
+        return $this->belongsTo(Suplier::class);
+    }
 }

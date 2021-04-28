@@ -4,7 +4,7 @@
 <div class="d-flex bd-cheatsheet container-fluid bg-body">
     <div class="col-md-2" style="margin-top : -28px">
         <section id="content">
-            <h5 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3" style="margin-left : 100px">{{ auth()->user()->roles->first()->name }}</h5>
+            <h5 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3" style="margin-left : 60px">{{ auth()->user()->roles->first()->name }}</h5>
             <article>
                 <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 text-center">
                     <img src="{{asset('image/awww.png')}}" class="rounded-circle mt-3" width="80px" alt="">
@@ -38,7 +38,9 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Stock Barang</h6>
-                        <h5 class="ml-auto">210</h5>
+                        <h5 class="ml-auto">
+                            {{ $barang->sum('quantity') }}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Request</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">{{ $totalrequest }}</h5>
                     </div>
                 </div>
             </div>
@@ -54,7 +56,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Barang Keluar</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">{{ $perm->sum('jmlh_permintaan') }}</h5>
                     </div>
                 </div>
             </div>
@@ -62,7 +64,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Barang Masuk</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">{{ $barang->sum('quantity') }}</h5>
                     </div>
                 </div>
             </div>
@@ -80,27 +82,28 @@
                             </label>
                             <input type="text" name="name" class="form-control" value="" placeholder="{{$user->name}}" required>
                         </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="description">
-                            Email
-                        </label>
-                        <input type="email" name="email" class="form-control" placeholder="{{$user->email}}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="description">
+                                Email
+                            </label>
+                            <input type="email" name="email" class="form-control" placeholder="{{$user->email}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="level">Akses</label>
+                            <select name="roles" id="level" class="form-control">
+                                <option value="">Pilih akses</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="level">Akses</label>
-                        <select name="roles" id="level" class="form-control">
-                            <option value="">Pilih akses</option>
-                            @foreach ($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="mt-3 mb-3 px-3">
+                <div class="px-3">
                     <button type="submit" class="btn btn-outline-info btn-sm">
                         Edit member
                     </button>

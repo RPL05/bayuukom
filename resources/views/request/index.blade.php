@@ -8,9 +8,9 @@
             <article>
                 <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 text-center">
                     <img src="{{asset('image/awww.png')}}" class="rounded-circle mt-3" width="80px" alt="">
-                    <p class="font-weight-bold text-center pt-2">Taylor otwel</p>
+                    <p class="font-weight-bold text-center pt-2">{{ auth()->user()->name }}</p>
                 </div>
-                <p class="text-muted text-center"style="margin-top: -15px">taylorotwel@mail.com
+                <p class="text-muted text-center"style="margin-top: -15px">{{ auth()->user()->email }}
                 </p>
                 <div class="d-flex justify-content-center" style="margin-top: 15px">
                 <div class="px-3">
@@ -47,7 +47,9 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Request</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">
+                            {{ $totalrequest }}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -55,7 +57,7 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Permintaan <br> Di terima</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">{{ $totalrequest }}</h5>
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Permintaan <br> Di tolak</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">{{ $totalrequest }}</h5>
                     </div>
                 </div>
             </div>
@@ -86,23 +88,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {{-- @forelse ($transaksis as $transaksi) --}}
-                        <tr>
-                            <td>REQ.2021.13</td>
-                            <td>BRG.2021.13</td>
-                            <td>100</td>
+                        @forelse ($permintaan as $barangs)
+                            <tr>
+                                <td>{{ $barangs->kode_request }}</td>
+                                @foreach ($barang as $brngs)
+                                    <td>{{ $brngs->kode_barang }}</td>
+                                @endforeach
+                                <td>{{ $barangs->jmlh_permintaan }}</td>
                             <td>
                                 <span class="badge badge-secondary">Waiting</span>
                             </td>
                             <td>
-                                <a href="" class="btn btn-outline-info btn-sm">Details</a>
+                                <a href="{{ route('request.show', $barangs->id) }}" class="btn btn-outline-info btn-sm">Details</a>
                             </td>
                         </tr>
-                        {{-- @empty
+                        @empty
                             <tr>
-                                <td class="text-center" colspan="6">Data Suplier Belum Tersedia</td>
+                                <td class="text-center" colspan="6">Data Request Belum Tersedia</td>
                             </tr>
-                        @endforelse --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>

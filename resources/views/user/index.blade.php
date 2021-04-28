@@ -38,7 +38,9 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Stock Barang</h6>
-                        <h5 class="ml-auto">210</h5>
+                        <h5 class="ml-auto">
+                            {{ $barang->sum('quantity') }}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Request</h6>
-                        <h5 class="ml-auto">100</h5>
+                        <h5 class="ml-auto">{{ $totalrequest }}</h5>
                     </div>
                 </div>
             </div>
@@ -54,7 +56,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Barang Keluar</h6>
-                        <h5 class="ml-auto">100</h5>
+                            <h5 class="ml-auto">{{ $perm->sum('jmlh_permintaan') }}</h5>
                     </div>
                 </div>
             </div>
@@ -62,7 +64,7 @@
                 <div class="card border-0 shadow">
                     <div class="card-body d-flex">
                         <h6 class="text-muted">Barang Masuk</h6>
-                        <h5 class="ml-auto">100</h5>
+                            <h5 class="ml-auto">{{ $barang->sum('quantity') }}</h5>
                     </div>
                 </div>
             </div>

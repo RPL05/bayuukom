@@ -8,9 +8,9 @@
             <article>
                 <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 text-center">
                     <img src="{{asset('image/awww.png')}}" class="rounded-circle mt-3" width="80px" alt="">
-                    <p class="font-weight-bold text-center pt-2">Steave Jobs</p>
+                    <p class="font-weight-bold text-center pt-2">{{ auth()->user()->name }}</p>
                 </div>
-                <p class="text-muted text-center"style="margin-top: -15px">steavejobs@mail.com
+                <p class="text-muted text-center"style="margin-top: -15px">{{ auth()->user()->email }}
                     <a href="http://" class="btn btn-outline-primary btn-sm btn-block mt-3">Invite Member</a>
                 </p>
                 <div class="d-flex justify-content-center" style="margin-top: 15px">

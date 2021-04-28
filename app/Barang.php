@@ -31,4 +31,9 @@ class Barang extends Model
     {
         return $this->hasMany(Permintaan::class);
     }
+
+    public function permintaans()
+    {
+        return $this->belongsTo(Permintaan::class);
+    }
 }

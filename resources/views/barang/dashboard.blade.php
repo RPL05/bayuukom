@@ -8,9 +8,9 @@
             <article>
                 <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 text-center">
                     <img src="{{asset('image/awww.png')}}" class="rounded-circle mt-3" width="80px" alt="">
-                    <p class="font-weight-bold text-center pt-2">Steave Jobs</p>
+                    <p class="font-weight-bold text-center pt-2">{{ auth()->user()->name }}</p>
                 </div>
-                <p class="text-muted text-center"style="margin-top: -15px">steavejobs@mail.com
+                <p class="text-muted text-center"style="margin-top: -15px">{{ auth()->user()->email }}
                 @role('admin|admingudang')
                     <a href="{{ route('users.index') }}" class="btn btn-outline-primary btn-sm btn-block mt-3">Invite Member</a>
                 @endrole
@@ -36,7 +36,7 @@
     </div>
     <div class="container">
         <div class="row">
-            @role('admin|suplier')
+            @role('admin')
             <div class="col-md-12">
                 <div class="d-flex">
                     <div class="col-md-3">
@@ -53,7 +53,7 @@
                         <div class="card border-0 shadow">
                             <div class="card-body d-flex">
                                 <h5 class="text-muted">Request</h5>
-                                <h4 class="ml-auto">100</h4>
+                                <h4 class="ml-auto">{{ $totalrequest }}</h4>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="card border-0 shadow">
                             <div class="card-body d-flex">
                                 <h5 class="text-muted">Barang Keluar</h5>
-                                <h4 class="ml-auto">100</h4>
+                                <h4 class="ml-auto">{{ $totalrequest }}</h4>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                         <div class="card border-0 shadow">
                             <div class="card-body d-flex">
                                 <h5 class="text-muted">Barang Masuk</h5>
-                                <h4 class="ml-auto">100</h4>
+                                <h4 class="ml-auto">{{ $totalrequest }}</h4>
                             </div>
                         </div>
                     </div>

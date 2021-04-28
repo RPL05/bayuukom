@@ -87,7 +87,7 @@
                     </div>
                 </div>
                     <button class="btn btn-outline-primary btn-sm">Kirim Permintaan</button>
-                    <a href="{{route('request.index')}}" class="btn btn-outline-info btn-sm" style="margin-left: 10px">Cancel</a>
+                    <a href="{{route('request.cekbarang.indexcek')}}" class="btn btn-outline-info btn-sm" style="margin-left: 10px">Cancel</a>
             </div>
         </form>
     </div>

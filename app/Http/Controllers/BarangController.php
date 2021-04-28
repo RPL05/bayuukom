@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\barang;
 use App\Suplier;
+use App\Permintaan;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -58,10 +59,19 @@ class BarangController extends Controller
     }
     public function dashboard()
     {
+        $totalrequest = Permintaan::all()->count();
         $data = [
-            'barang'      => Barang::all(),
-            'suplier'     => Suplier::Count()->get(),
+            'barang'      => Barang::Count()->get(),
+            'supliers'     => Suplier::all(),
         ];
-       return view('barang.dashboard', $data);
+       return view('barang.dashboard', $data, compact('totalrequest'));
+    }
+    public function destroy($id)
+    {
+        $barang = Barang::findOrFail($id);
+
+        $barang->delete($barang->all());
+
+        return redirect()->back();
     }
 }

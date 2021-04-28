@@ -8,9 +8,9 @@
             <article>
                 <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 text-center">
                     <img src="{{asset('image/awww.png')}}" class="rounded-circle mt-3" width="80px" alt="">
-                    <p class="font-weight-bold text-center pt-2">Steave Jobs</p>
+                    <p class="font-weight-bold text-center pt-2">{{ auth()->user()->name }}</p>
                 </div>
-                <p class="text-muted text-center"style="margin-top: -15px">steavejobs@mail.com
+                <p class="text-muted text-center"style="margin-top: -15px">{{ auth()->user()->email }}
                     <a href="{{ route('users.index') }}" class="btn btn-outline-primary btn-sm btn-block mt-3">Invite Member</a>
                 </p>
                 <div class="d-flex justify-content-center" style="margin-top: 15px">
@@ -89,17 +89,25 @@
                         <th>Nama Barang</th>
                         <th>Quantity</th>
                         <th>Tanggal Masuk</th>
+                        <th>Option</th>
                     </tr>
                     </thead>
                     <tbody>
                         @forelse ($barangs as $barang)
                         <tr>
                             <td>
-                                <a href="{{route('barang.edit', $barang->id)}}" class="btn btn-outline-primary btn-sm">BRG.2021.13</a>
+                                <a href="{{route('barang.edit', $barang->id)}}" class="btn btn-outline-primary btn-sm">{{ $barang->kode_barang }}</a>
                             </td>
                             <td>{{$barang->nama}}</td>
                             <td>{{$barang->quantity}}</td>
                             <td>{{$barang->created_at->format('d F Y')}}</td>
+                            <td>
+                                <form action="{{ route('barang.delete', $barang->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Are You Sure You Want To Delete This Item?')">Hapus</button>
+                                </form>
+                            </td>
                         </tr>
                         @empty
                             <tr>

@@ -26,8 +26,8 @@ class Suplier extends Model
     {
         return $this->hasMany(Barang::class);
     }
-    public function dashboard()
+    public function permintaan()
     {
-        return $this->hasMany(Dashboard::class);
+        return $this->hasMany(Permintaan::class);
     }
 }

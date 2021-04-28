@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\suplier;
+use App\Suplier;
+use App\Permintaan;
+use App\Barang;
 use Illuminate\Http\Request;
 
 class SuplierController extends Controller
@@ -19,7 +21,12 @@ class SuplierController extends Controller
     }
     public function create()
     {
-        return view('suplier.create');
+        $totalrequest = Permintaan::all()->count();
+        $data = [
+            'barang'      => Barang::Count()->get(),
+            'perm'        => Permintaan::all(),
+        ];
+        return view('suplier.create', $data, compact('totalrequest'));
     }
     public function store(Request $request)
     {
